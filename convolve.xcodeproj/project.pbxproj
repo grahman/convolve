@@ -94,6 +94,8 @@
 		EAF59C321CE3C5F9003E85D7 /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
 		EAF59C381CE3C666003E85D7 /* lpf.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = lpf.aif; sourceTree = "<group>"; };
 		EAF59C391CE3C666003E85D7 /* ssweep.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = ssweep.aif; sourceTree = "<group>"; };
+		EAF59C3C1CE3C7D6003E85D7 /* LICENSE.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = LICENSE.md; sourceTree = "<group>"; };
+		EAF59C3D1CE3C7D6003E85D7 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +116,8 @@
 		EAF59BDF1CE3C529003E85D7 = {
 			isa = PBXGroup;
 			children = (
+				EAF59C3C1CE3C7D6003E85D7 /* LICENSE.md */,
+				EAF59C3D1CE3C7D6003E85D7 /* README.md */,
 				EAF59C321CE3C5F9003E85D7 /* AudioUnit.framework */,
 				EAF59BF61CE3C545003E85D7 /* AudioToolbox.framework */,
 				EAF59BF41CE3C537003E85D7 /* CoreAudio.framework */,
