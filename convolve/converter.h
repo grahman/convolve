@@ -29,10 +29,12 @@ namespace Gmb {
         AudioFileID audioFile;
         AudioConverterRef converterRef;
         AudioBufferList *converterOutput;
-        unsigned int numFrames;
+        unsigned int outNumFrames;
+        unsigned int inNumFrames;
         unsigned int numBytes;          /* in "data" section of audio file, > unconvertedSize for vbr */
         unsigned int convertedSize;
         unsigned int unconvertedSize;   /* Only used if informat is cbr */
+        unsigned int unconvertedOffset;
         unsigned int i;                 /* Offset into the file, for use in the _render function */
         unsigned int currentPacket;     /* Only used if informat is vbr */
         unsigned int maxPacketSize;     /* Only used if informat is vbr */
@@ -40,7 +42,7 @@ namespace Gmb {
     public:
         Converter(const char *filepath, const AudioStreamBasicDescription &outAsbd, unsigned int bufsize);
         ~Converter();
-        unsigned int n() const {return this->numFrames;};
+        unsigned int n() const {return this->outNumFrames;};
         const AudioStreamBasicDescription &outStreamFormat() const {return outFormat;};
         const AudioStreamBasicDescription &inStreamFormat() const {return inFormat;};
     };

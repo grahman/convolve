@@ -176,6 +176,7 @@ void convolveFiles(const char *impulsePath, const char *signalPath, const char *
     FillOutASBDForLPCM(internalFormat, SAMPLERATE, 1, 64, 64, true, false);
     Gmb::Converter signal(signalPath, internalFormat, BUF_SIZE);
     Gmb::Converter impulse(impulsePath, internalFormat, BUF_SIZE);
+
     bool swapimpulse = (impulse.n() > signal.n()) ? true: false;
     UInt32 bufsize = BUF_SIZE;
     UInt32 numSamplesOut = swapimpulse ? impulse.n() : signal.n();

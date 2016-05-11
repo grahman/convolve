@@ -20,7 +20,7 @@ void Gmb::converterRenderProc(double *out, unsigned int n, void *module)
     Gmb::Converter *converter = (Gmb::Converter *)module;
     unsigned int &i = converter->i;
     unsigned int j = 0;     /* Counter for this render cycle */
-    unsigned int N = converter->numFrames;
+    unsigned int N = converter->outNumFrames;
     double *x = (double *)(converter->converted);
     while (j < n) {
         if (i < N) {
@@ -57,8 +57,9 @@ OSStatus Gmb::complexInputDataProc ( AudioConverterRef inAudioConverter, UInt32 
         if (outDataPacketDescription)
             *outDataPacketDescription = &pckd;
     } else {
-        ioData->mBuffers->mDataByteSize = converter->numBytes;
-        ioData->mBuffers->mData = (void *)converter->unconverted;
+        ioData->mBuffers->mDataByteSize = *ioNumberDataPackets * converter->inFormat.mBytesPerFrame;
+        ioData->mBuffers->mData = (void *)&converter->unconverted[converter->unconvertedOffset];
+        converter->unconvertedOffset += ioData->mBuffers->mDataByteSize;
     }
 
     ioData->mBuffers->mNumberChannels = converter->inFormat.mChannelsPerFrame;
@@ -71,6 +72,7 @@ Gmb::Converter::Converter(const char *filepath, const AudioStreamBasicDescriptio
     outFormat = outputFormat;
     OSStatus error = noErr;
     currentPacket = 0;
+    unconvertedOffset = 0;
     
 #pragma mark open an audio file
     CFURLRef URL = CFURLCreateFromFileSystemRepresentation(kCFAllocatorDefault, (UInt8*)filepath, strlen(filepath), FALSE);
@@ -90,8 +92,8 @@ Gmb::Converter::Converter(const char *filepath, const AudioStreamBasicDescriptio
     
     XThrowIfError(AudioFileGetPropertyInfo(audioFile, kAudioFilePropertyEstimatedDuration, &propSize, NULL), "AudioFileGetPropertyInfo - duration");
     XThrowIfError(AudioFileGetProperty(audioFile, kAudioFilePropertyEstimatedDuration, &propSize, &durationInSeconds), "AudioFileGetProperty - duration");
-    numFrames = outputFormat.mSampleRate * durationInSeconds;
-    
+    outNumFrames = outputFormat.mSampleRate * durationInSeconds;
+    inNumFrames = inFormat.mSampleRate * durationInSeconds;
     XThrowIfError(AudioFileGetPropertyInfo(audioFile,
                                            kAudioFilePropertyAudioDataByteCount,
                                            &propSize,
@@ -105,14 +107,18 @@ Gmb::Converter::Converter(const char *filepath, const AudioStreamBasicDescriptio
     UInt32 numPackets;
     
     Gmb::calculateNumPackets(audioFile, inFormat, durationInSeconds, &bufferSize, &numPackets);
-    numPacketDescriptions = (vbr) ? numPackets: numFrames;
+    numPacketDescriptions = (vbr) ? numPackets: outNumFrames;
     UInt32 maxPacketSizeSize = sizeof(maxPacketSize);
     XThrowIfError(AudioFileGetProperty(audioFile,
                                        kAudioFilePropertyMaximumPacketSize,
                                        &maxPacketSizeSize,
                                        &maxPacketSize), "AudioFileGetProperty - max packet size");
-    unconvertedSize = maxPacketSize * numPackets;
-    convertedSize = numFrames * outFormat.mBytesPerFrame;
+    if (vbr)
+        unconvertedSize = maxPacketSize * numPackets;
+    else
+        unconvertedSize = inNumFrames * inFormat.mBytesPerFrame;
+    
+    convertedSize = outNumFrames * outFormat.mBytesPerFrame;
     converted = new char[convertedSize];
     unconverted = new char[unconvertedSize];
     singlePacket = new char[maxPacketSize];
@@ -124,7 +130,7 @@ Gmb::Converter::Converter(const char *filepath, const AudioStreamBasicDescriptio
     memset(singlePacket, 0, maxPacketSize);
     
     unsigned int tempNumBytes = convertedSize;
-    unsigned int N = numFrames;
+    unsigned int N = outNumFrames;
     if (!vbr) {
         XThrowIfError(AudioFileReadPacketData(audioFile,
                                               false,
@@ -151,11 +157,11 @@ Gmb::Converter::Converter(const char *filepath, const AudioStreamBasicDescriptio
         }
     }
     
-    converterOutput = Gmb::createAudioBufferList(1, numFrames * outFormat.mBytesPerFrame, outFormat.mChannelsPerFrame);
+    converterOutput = Gmb::createAudioBufferList(1, outNumFrames * outFormat.mBytesPerFrame, outFormat.mChannelsPerFrame);
     XThrowIfError(AudioConverterFillComplexBuffer(converterRef,
                                                   complexInputDataProc,
                                                   this,
-                                                  &numFrames,
+                                                  &outNumFrames,
                                                   converterOutput,
                                                   NULL), "AudioConverterFillComplexBuffer");
     
