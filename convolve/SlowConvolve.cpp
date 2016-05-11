@@ -27,9 +27,7 @@ void Gmb::convolve_slowly(double *x, unsigned long nx, double *h, unsigned long 
                 y[i] += (h[j] * x[i - j]);
             }
         }
-#ifdef DEBUG
-//        cout << "y[" << i << "] = " << y[i] << endl;
-#endif
+
     }
 }
 

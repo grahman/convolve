@@ -10,9 +10,7 @@
 #define FastConvolve_hpp
 
 #include <stdio.h>
-//#include "module.h"
 #include "AudioModule.h"
-
 
 namespace Gmb {
     class FastConvolver: public AudioModule {
@@ -31,13 +29,11 @@ namespace Gmb {
         unsigned int nm1;       /* n + m - 1, cached just for convenience */
         unsigned int segmentFillCount;
         unsigned int segmentOverFlow;
-//        Gmb::Module *upstream;
         void process_segment(double *input, unsigned int inputLength);
     public:
         FastConvolver(double *impulseTimeDomain, unsigned int impulseLength, unsigned int system_bufsize, AudioModule *upstream = NULL);
         ~FastConvolver();
         unsigned long length() const {return nm1;};
-//        AudioConverterComplexInputDataProc render;
         bool ready() const {return segmentFillCount >= n;};
 
         friend void fastConvolveRenderProc(double *out, unsigned int n, void *module);

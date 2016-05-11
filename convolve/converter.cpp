@@ -10,7 +10,6 @@
 #include "AudioBuffer.h"
 #include "PublicUtility/CAXException.h"
 #include "AudioUtil.h"
-#include <iostream>
 #include "gmbutil.h"
 
 using namespace Gmb;

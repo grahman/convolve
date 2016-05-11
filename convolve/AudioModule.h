@@ -9,9 +9,6 @@
 #ifndef AudioModule_hpp
 #define AudioModule_hpp
 
-#include <stdio.h>
-
-
 namespace Gmb {
     typedef void(*renderProc)(double *out, unsigned int n, void *module);
 

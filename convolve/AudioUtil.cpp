@@ -7,7 +7,6 @@
 //
 
 #include "AudioUtil.h"
-#include <iostream>
 #include "fft.h"
 
 using namespace Gmb;

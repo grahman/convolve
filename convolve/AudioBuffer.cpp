@@ -7,7 +7,6 @@
 //
 
 #include "AudioBuffer.h"
-#include <exception>
 
 AudioBuffer *Gmb::createAudioBuffer(unsigned int numChannels, unsigned int dataByteSize)
 {

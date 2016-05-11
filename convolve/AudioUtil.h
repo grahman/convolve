@@ -14,7 +14,6 @@
 #import <AudioToolbox/AudioFile.h>
 #import <AudioUnit/AudioUnit.h>
 #import <CoreMedia/CoreMedia.h>
-#include <vector>
 #include "sinesweep.h"
 
 #ifndef MOD

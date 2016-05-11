@@ -9,11 +9,8 @@
 #ifndef converter_hpp
 #define converter_hpp
 
-#include <stdio.h>
 #include "AudioModule.h"
 #include <AudioToolbox/AudioToolbox.h>
-#include <vector>
-#include <iostream>
 
 namespace Gmb {
     class Converter : public AudioModule {

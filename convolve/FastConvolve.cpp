@@ -8,9 +8,6 @@
 
 #include "FastConvolve.h"
 #include "gmbutil.h"
-#include <exception>
-#include <stdexcept>
-#include <string.h>
 #include "fft.h"
 
 Gmb::FastConvolver::FastConvolver(double *impulseTimeDomain, unsigned int impulseLength, unsigned int system_bufsize, Gmb::AudioModule *_upstream)
@@ -28,7 +25,6 @@ Gmb::FastConvolver::FastConvolver(double *impulseTimeDomain, unsigned int impuls
     rex = new double[fftsize];
     imx = new double[fftsize];
     segcache = new double[fftsize];
-//    upstream = _upstream;
     
     if (!(reh && imh && y && overlap && temp && rex && imx && segcache)) {
         throw std::exception();
@@ -39,7 +35,6 @@ Gmb::FastConvolver::FastConvolver(double *impulseTimeDomain, unsigned int impuls
     memset(overlap, 0, (m - 1) * sizeof(double));
     memcpy(reh, impulseTimeDomain, impulseLength * sizeof(double));
     fft(reh, imh, fftsize);
-//    render = &fastConvolveRenderProc;
 }
 
 void Gmb::FastConvolver::process_segment(double *input, unsigned int inputLength)

@@ -391,6 +391,7 @@
 				EAF59BF11CE3C529003E85D7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
