@@ -14,25 +14,13 @@
 #import <AudioToolbox/AudioFile.h>
 #import <AudioUnit/AudioUnit.h>
 #import <CoreMedia/CoreMedia.h>
-#include "sinesweep.h"
 
 #ifndef MOD
 #define MOD(a, b) ({(a % b + b) % b;})
 #endif
-#define SAMPLERATE 44100.0
 
 namespace Gmb {
-    unsigned int samplesForDuration(double duration, double sr);
-    
-    void calculateNumPackets(AudioFileID audioFile,
-                             AudioStreamBasicDescription inDesc,
-                             float inSeconds,
-                             UInt32 *outBufferSize,
-                             UInt32 *outNumPackets);
-    
     OSStatus createOutputAudioFile(const char *name, AudioFileID *outAudioFile, const AudioStreamBasicDescription &format);
-
-
     void getMagicCookie(AudioFileID audioFile,
                                     void **cookiePtr,
                                     UInt32 &propertySize);

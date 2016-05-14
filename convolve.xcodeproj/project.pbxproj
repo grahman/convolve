@@ -17,7 +17,6 @@
 		EAF59C101CE3C5B7003E85D7 /* FastConvolve.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAF59C011CE3C5B7003E85D7 /* FastConvolve.cpp */; };
 		EAF59C111CE3C5B7003E85D7 /* gmbutil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAF59C051CE3C5B7003E85D7 /* gmbutil.cpp */; };
 		EAF59C121CE3C5B7003E85D7 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAF59C071CE3C5B7003E85D7 /* main.cpp */; };
-		EAF59C131CE3C5B7003E85D7 /* sinesweep.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAF59C081CE3C5B7003E85D7 /* sinesweep.cpp */; };
 		EAF59C141CE3C5B7003E85D7 /* SlowConvolve.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAF59C0A1CE3C5B7003E85D7 /* SlowConvolve.cpp */; };
 		EAF59C2B1CE3C5DD003E85D7 /* CAAudioChannelLayout.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAF59C181CE3C5DD003E85D7 /* CAAudioChannelLayout.cpp */; };
 		EAF59C2C1CE3C5DD003E85D7 /* CAAudioChannelLayoutObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAF59C1A1CE3C5DD003E85D7 /* CAAudioChannelLayoutObject.cpp */; };
@@ -66,8 +65,6 @@
 		EAF59C051CE3C5B7003E85D7 /* gmbutil.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = gmbutil.cpp; sourceTree = "<group>"; };
 		EAF59C061CE3C5B7003E85D7 /* gmbutil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gmbutil.h; sourceTree = "<group>"; };
 		EAF59C071CE3C5B7003E85D7 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
-		EAF59C081CE3C5B7003E85D7 /* sinesweep.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sinesweep.cpp; sourceTree = "<group>"; };
-		EAF59C091CE3C5B7003E85D7 /* sinesweep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sinesweep.h; sourceTree = "<group>"; };
 		EAF59C0A1CE3C5B7003E85D7 /* SlowConvolve.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SlowConvolve.cpp; sourceTree = "<group>"; };
 		EAF59C0B1CE3C5B7003E85D7 /* SlowConvolve.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlowConvolve.h; sourceTree = "<group>"; };
 		EAF59C161CE3C5DD003E85D7 /* AUOutputBL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AUOutputBL.h; sourceTree = "<group>"; };
@@ -142,21 +139,19 @@
 				EAF59BF81CE3C5B7003E85D7 /* AudioBuffer.cpp */,
 				EAF59BF91CE3C5B7003E85D7 /* AudioBuffer.h */,
 				EAF59BFA1CE3C5B7003E85D7 /* AudioModule.h */,
-				EAF59BFB1CE3C5B7003E85D7 /* AudioUtil.cpp */,
 				EAF59BFC1CE3C5B7003E85D7 /* AudioUtil.h */,
+				EAF59BFB1CE3C5B7003E85D7 /* AudioUtil.cpp */,
 				EAF59BFD1CE3C5B7003E85D7 /* CAUtilityFunctions.cpp */,
 				EAF59BFE1CE3C5B7003E85D7 /* CAUtilityFunctions.h */,
-				EAF59BFF1CE3C5B7003E85D7 /* converter.cpp */,
 				EAF59C001CE3C5B7003E85D7 /* converter.h */,
-				EAF59C011CE3C5B7003E85D7 /* FastConvolve.cpp */,
+				EAF59BFF1CE3C5B7003E85D7 /* converter.cpp */,
 				EAF59C021CE3C5B7003E85D7 /* FastConvolve.h */,
+				EAF59C011CE3C5B7003E85D7 /* FastConvolve.cpp */,
 				EAF59C031CE3C5B7003E85D7 /* fft.h */,
 				EAF59C041CE3C5B7003E85D7 /* fft.hpp */,
 				EAF59C051CE3C5B7003E85D7 /* gmbutil.cpp */,
 				EAF59C061CE3C5B7003E85D7 /* gmbutil.h */,
 				EAF59C071CE3C5B7003E85D7 /* main.cpp */,
-				EAF59C081CE3C5B7003E85D7 /* sinesweep.cpp */,
-				EAF59C091CE3C5B7003E85D7 /* sinesweep.h */,
 				EAF59C0A1CE3C5B7003E85D7 /* SlowConvolve.cpp */,
 				EAF59C0B1CE3C5B7003E85D7 /* SlowConvolve.h */,
 				EAF59C151CE3C5DD003E85D7 /* PublicUtility */,
@@ -257,7 +252,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EAF59C131CE3C5B7003E85D7 /* sinesweep.cpp in Sources */,
 				EAF59C111CE3C5B7003E85D7 /* gmbutil.cpp in Sources */,
 				EAF59C0E1CE3C5B7003E85D7 /* CAUtilityFunctions.cpp in Sources */,
 				EAF59C0C1CE3C5B7003E85D7 /* AudioBuffer.cpp in Sources */,

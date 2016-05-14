@@ -22,6 +22,8 @@
 #include "converter.h"
 #include "gmbutil.h"
 
+#define DEFAULT_MODE 1
+
 using namespace std;
 
 struct SimpleSignal {
@@ -38,28 +40,38 @@ void convolveFiles(const char *impulsePath, const char *signalPath, const char *
 
 static double *BUF;
 static unsigned int BUF_SIZE;
+static double SAMPLERATE = 44100.0;
+
 int main(int argc, const char * argv[]) {
     // insert code here...
-    if (argc != 5) {
-        cerr << "Usage: convolve <impulseResponse> <signal> <outFileName>" << endl;
+    int mode = DEFAULT_MODE;
+    
+    if (argc == 6) {
+        mode = atoi(argv[5]);
+    } else if (argc != 5) {
+        cerr << "Usage: convolve <impulseResponse> <signal> <outFileName> <out_samplerate> <*optional* mode> " << endl;
+        cerr << "/*\t<mode> = 0 for direct form convolution */" << endl;
+        cerr << "/*\t<mode> = 1 for FFT convolution (faster) */" << endl;
+        cerr << "/*\tNot specifying <mode> is the same as <mode> = 1" << endl;
+        cerr << "/*\t<out_samplerate> = 1 of { 44100, 48000, 96000, 192000 } */" << endl;
         exit(1);
     }
     
     const char *impulsePath = argv[1];
     const char *signalPath = argv[2];
     const char *outputPath = argv[3];
+    int sr = atoi(argv[4]);
+    SAMPLERATE = (double)sr;
     CAStreamBasicDescription asbd;
     
-    if (atoi(argv[4]) == 0) {
+    if (mode == 0) {
         convolveFilesSlowly(impulsePath, signalPath, outputPath);
-    } else if (atoi(argv[4]) == 1) {
+    } else {
         convolveFiles(impulsePath, signalPath, outputPath);
     }
 
     return 0;
 }
-
-
 
 OSStatus copyOutputSimpleSignal(AudioConverterRef              converterRef,
                                 UInt32                         *ioNumberDataPackets,

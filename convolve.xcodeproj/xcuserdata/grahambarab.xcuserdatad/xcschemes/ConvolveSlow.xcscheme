@@ -63,7 +63,7 @@
       </BuildableProductRunnable>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "audio/lpf.aif audio/ssweep.aif audio/output.aif 0"
+            argument = "audio/lpf.aif audio/ssweep.aif audio/output.aif 44100 0"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>

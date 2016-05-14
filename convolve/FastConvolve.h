@@ -22,14 +22,13 @@ namespace Gmb {
         double *y;              /* n samples */
         double *rex;            /* Zero padded input segment */
         double *imx;
-        double *segcache;
         unsigned int m;         /* Length of time domain impulse response */
         unsigned int fftsize;   /* Power of 2 size of fft */
         unsigned int n;         /* Buffer size per render cycle */
         unsigned int nm1;       /* n + m - 1, cached just for convenience */
         unsigned int segmentFillCount;
         unsigned int segmentOverFlow;
-        void process_segment(double *input, unsigned int inputLength);
+        void process_segment(double *input, unsigned int inputLength);  /* Output is stored in "y" data member */
     public:
         FastConvolver(double *impulseTimeDomain, unsigned int impulseLength, unsigned int system_bufsize, AudioModule *upstream = NULL);
         ~FastConvolver();

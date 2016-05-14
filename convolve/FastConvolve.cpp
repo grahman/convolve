@@ -24,9 +24,8 @@ Gmb::FastConvolver::FastConvolver(double *impulseTimeDomain, unsigned int impuls
     temp = new double[m - 1];
     rex = new double[fftsize];
     imx = new double[fftsize];
-    segcache = new double[fftsize];
     
-    if (!(reh && imh && y && overlap && temp && rex && imx && segcache)) {
+    if (!(reh && imh && y && overlap && temp && rex && imx)) {
         throw std::exception();
     }
     

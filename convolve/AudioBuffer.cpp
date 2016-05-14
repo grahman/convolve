@@ -8,47 +8,6 @@
 
 #include "AudioBuffer.h"
 
-AudioBuffer *Gmb::createAudioBuffer(unsigned int numChannels, unsigned int dataByteSize)
-{
-    AudioBuffer *buf = new AudioBuffer();
-    
-    buf->mDataByteSize = dataByteSize;
-    buf->mNumberChannels = numChannels;
-    buf->mData = calloc(dataByteSize, 1);
-    if (!buf->mData)
-        throw std::exception();
-    
-    return buf;
-}
-
-void Gmb::destroyAudioBuffer(AudioBuffer *buf)
-{
-    free (buf->mData);
-    delete buf;
-}
-
-
-AudioBufferList *Gmb::createAudioBufferList(std::vector<AudioBuffer *>buflist)
-{
-    size_t numBuffers = buflist.size();
-    AudioBufferList *list = (AudioBufferList *)malloc(sizeof(AudioBufferList) + (numBuffers - 1) * sizeof(list->mBuffers[0]));
-    if (!list) {
-        throw std::exception();
-    }
-    
-    size_t i;
-    list->mNumberBuffers = (unsigned int)numBuffers;
-    
-    for (i = 0; i < numBuffers; ++i) {
-        list->mBuffers[i].mData = buflist[i]->mData;
-        list->mBuffers[i].mDataByteSize = buflist[i]->mDataByteSize;
-        list->mBuffers[i].mNumberChannels = buflist[i]->mNumberChannels;
-        list->mBuffers[i].mData = buflist[i]->mData;
-    }
-    
-    return list;
-}
-
 AudioBufferList *Gmb::createAudioBufferList(unsigned int numBuffers, unsigned int bytesSize, unsigned int numChannels)
 {
     AudioBufferList *list = NULL;

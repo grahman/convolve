@@ -16,9 +16,6 @@
 #include <vector>
 
 namespace Gmb {
-    AudioBuffer *createAudioBuffer(unsigned int numChannels, unsigned int dataByteSize);
-    void destroyAudioBuffer(AudioBuffer *buf);
-    AudioBufferList *createAudioBufferList(std::vector<AudioBuffer *>buffers);
     AudioBufferList *createAudioBufferList(unsigned int numBuffers, unsigned int byteSize, unsigned int numChannels);
     void destroyAudioBufferList(AudioBufferList *list);
 }
